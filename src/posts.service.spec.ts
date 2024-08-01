@@ -8,15 +8,20 @@ describe('PostsService', () => {
 
   beforeEach(async () => {
     postsService = new PostsService();
-
     postsService.create({ text: 'Some pre-existing post' });
   });
 
   it('should add a new post', () => {
-    // реализуйте тест-кейс
+    // Arrange: post
+    // Act: добавляем пост с помощью метода create
+    const createdPost = postsService.create(post);
+    // Assert: проверяем, что пост был добавлен
+    expect(postsService.find(createdPost.id)).toEqual(createdPost);
   });
 
   it('should find a post', () => {
-    // реализуйте тест-кейс
+    const createdPost = postsService.create(post);
+    const foundPost = postsService.find(createdPost.id);
+    expect(foundPost).toMatchObject(post);
   });
 });
